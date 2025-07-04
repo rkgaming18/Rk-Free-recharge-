@@ -1,95 +1,117 @@
-<!DOCTYPE html>
-<html lang="as">
+<!DOCTYPE html><html lang="as">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RK Gaming Spin to Win</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spin Wheel Rewards</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #0f172a;
-      color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 30px;
+      background: #f5f5f5;
     }
-    .wheel {
+    .wheel-container {
+      margin: 50px auto;
+      position: relative;
       width: 300px;
       height: 300px;
       border-radius: 50%;
-      border: 10px solid #22d3ee;
-      margin: 20px auto;
-      position: relative;
-      background: conic-gradient(
-        #4ade80 0deg 90deg, 
-        #facc15 90deg 180deg, 
-        #60a5fa 180deg 270deg, 
-        #f87171 270deg 360deg
-      );
-      transition: transform 5s ease-out;
+      overflow: hidden;
+      border: 5px solid #444;
     }
-    .spin-btn {
-      margin-top: -40px;
-      position: relative;
-      background: #22c55e;
-      border: none;
-      padding: 12px 25px;
+    .segment {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      transform-origin: 100% 100%;
+      background: #eee;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
       color: white;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
     }
-    .result, .share-btns {
-      margin-top: 25px;
-      display: none;
-    }
-    .share-btns button {
-      background: #22c55e;
-      border: none;
-      padding: 12px 25px;
-      color: white;
-      font-size: 16px;
-      margin: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+    .segment1 { background: #e74c3c; transform: rotate(0deg); }
+    .segment2 { background: #3498db; transform: rotate(90deg); }
+    .segment3 { background: #2ecc71; transform: rotate(180deg); }
+    .segment4 { background: #f1c40f; transform: rotate(270deg); }.spin-btn {
+  position: absolute;
+  top: 110px;
+  left: 110px;
+  width: 80px;
+  height: 80px;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  z-index: 20;
+}
+
+.popup-btn {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.whatsapp-btn { background: #25D366; color: white; }
+.instagram-btn { background: #C13584; color: white; }
+
   </style>
 </head>
 <body>
-  <h1>🎮 RK Gaming Spin to Win 🎁</h1>
-  <div class="wheel" id="wheel"></div>
-  <button class="spin-btn" onclick="spin()">🔄 চাকৰি ঘূৰাওক</button>
-  <div class="result" id="result"></div>
-  <div class="share-btns" id="shareBtns">
-    <button onclick="shareWhatsApp()">📲 WhatsAppত Share কৰক</button>
-    <button onclick="followInsta()">📷 Follow Instagram</button>
-  </div>
+  <h2>স্পিন কৰি উপহাৰ জিকক!</h2>
+  <div class="wheel-container" id="wheel">
+    <div class="segment segment1">₹299 Jio Recharge</div>
+    <div class="segment segment2">1GB Data</div>
+    <div class="segment segment3">5GB Data</div>
+    <div class="segment segment4">2GB Data</div>
+    <div class="spin-btn" onclick="spinWheel()">Spin</div>
+  </div>  <div id="popup">
+    <h3 id="reward-text"></h3>
+    <p>🎁 এই উপহাৰটো Unlock কৰিবলৈ তলৰ Task দুটা সম্পূৰ্ণ কৰক:</p>
+    <button class="popup-btn whatsapp-btn" onclick="shareWhatsApp()">📲 WhatsAppত শ্বেয়াৰ কৰক</button>
+    <button class="popup-btn instagram-btn" onclick="followInstagram()">📸 Instagram Follow কৰক</button>
+  </div>  <script>
+    const rewards = ["₹299 Jio Recharge", "1GB Data", "5GB Data", "2GB Data"];
 
-  <script>
-    const wheel = document.getElementById("wheel");
-    const result = document.getElementById("result");
-    const shareBtns = document.getElementById("shareBtns");
-    const prizes = ["₹299 Jio Recharge", "1GB Data", "5GB Data", "2GB Data"];
+    function spinWheel() {
+      const wheel = document.getElementById("wheel");
+      const degree = 3600 + Math.floor(Math.random() * 360);
+      wheel.style.transition = "transform 4s ease-out";
+      wheel.style.transform = `rotate(${degree}deg)`;
 
-    function spin() {
-      const rand = Math.floor(Math.random() * 4);
-      const deg = 3600 + rand * 90 + 45;
-      wheel.style.transform = `rotate(${deg}deg)`;
+      const selected = Math.floor(((degree % 360) / 90)) % 4;
 
       setTimeout(() => {
-        result.style.display = "block";
-        result.innerHTML = `🎉 আপুনি জিকিলে: <strong>${prizes[rand]}</strong>`;
-        shareBtns.style.display = "block";
-      }, 5200);
+        document.getElementById("reward-text").innerText = `🎉 তুমি লাভ কৰিলে: ${rewards[selected]}`;
+        document.getElementById("popup").style.display = "block";
+      }, 4000);
     }
 
     function shareWhatsApp() {
-      const text = encodeURIComponent(`${result.innerText}\nচাওক 👉 https://rkgaming18.github.io/Rk-Free-recharge-/`);
-      window.location.href = `https://wa.me/?text=${text}`;
+      const message = encodeURIComponent("মই Spin Wheel খেলিছোঁ আৰু উপহাৰ লাভ কৰিছোঁ! আপোনিও চেষ্টা কৰক! 🎉");
+      window.open(`https://api.whatsapp.com/send?text=${message}`, "_blank");
     }
 
-    function followInsta() {
-      window.location.href = "https://www.instagram.com/akhim_b18";
+    function followInstagram() {
+      window.open("https://instagram.com/akhim_b18", "_blank");
     }
-  </script>
-</body>
+  </script></body>
 </html>
