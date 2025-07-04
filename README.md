@@ -105,10 +105,7 @@
       }, 4000);
     }
 
-    function shareWhatsApp() {
-      const message = encodeURIComponent("মই Spin Wheel খেলিছোঁ আৰু উপহাৰ লাভ কৰিছোঁ! আপোনিও চেষ্টা কৰক! 🎉");
-      window.open(`https://api.whatsapp.com/send?text=${message}`, "_blank");
-    }
+    
 
     function followInstagram() {
       window.open("https://instagram.com/akhim_b18", "_blank");
