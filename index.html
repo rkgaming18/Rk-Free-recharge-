@@ -23,7 +23,6 @@
       width: 50%;
       height: 50%;
       transform-origin: 100% 100%;
-      background: #eee;
       clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
       display: flex;
       align-items: center;
@@ -31,10 +30,10 @@
       font-weight: bold;
       color: white;
     }
-    .segment1 { background: #e74c3c; transform: rotate(0deg); }
-    .segment2 { background: #3498db; transform: rotate(90deg); }
-    .segment3 { background: #2ecc71; transform: rotate(180deg); }
-    .segment4 { background: #f1c40f; transform: rotate(270deg); }.spin-btn {
+    .segment1 { background: #FF5733; transform: rotate(0deg); }       /* Orange */
+    .segment2 { background: #2980B9; transform: rotate(90deg); }      /* Blue */
+    .segment3 { background: #27AE60; transform: rotate(180deg); }     /* Green */
+    .segment4 { background: #F39C12; transform: rotate(270deg); }     /* Yellow */.spin-btn {
   position: absolute;
   top: 110px;
   left: 110px;
@@ -70,7 +69,6 @@
   cursor: pointer;
   border-radius: 5px;
 }
-.whatsapp-btn { background: #25D366; color: white; }
 .instagram-btn { background: #C13584; color: white; }
 
   </style>
@@ -85,8 +83,7 @@
     <div class="spin-btn" onclick="spinWheel()">Spin</div>
   </div>  <div id="popup">
     <h3 id="reward-text"></h3>
-    <p>🎁 এই উপহাৰটো Unlock কৰিবলৈ তলৰ Task দুটা সম্পূৰ্ণ কৰক:</p>
-    <button class="popup-btn whatsapp-btn" onclick="shareWhatsApp()">📲 WhatsAppত শ্বেয়াৰ কৰক</button>
+    <p>🎁 এই উপহাৰটো Unlock কৰিবলৈ তলৰ Task সম্পূৰ্ণ কৰক:</p>
     <button class="popup-btn instagram-btn" onclick="followInstagram()">📸 Instagram Follow কৰক</button>
   </div>  <script>
     const rewards = ["₹299 Jio Recharge", "1GB Data", "5GB Data", "2GB Data"];
@@ -103,7 +100,7 @@
         document.getElementById("reward-text").innerText = `🎉 তুমি লাভ কৰিলে: ${rewards[selected]}`;
         document.getElementById("popup").style.display = "block";
       }, 4000);
-    
+    }
 
     function followInstagram() {
       window.open("https://instagram.com/akhim_b18", "_blank");
