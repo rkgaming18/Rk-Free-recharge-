@@ -1,53 +1,86 @@
-<!DOCTYPE html><html lang="as">
+<!DOCTYPE html>
+<html lang="as">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spin Wheel Rewards</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spin Wheel</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f5f5f5;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
     .wheel-container {
-      margin: 50px auto;
       position: relative;
       width: 300px;
       height: 300px;
       border-radius: 50%;
+      border: 10px solid #00CFFF;
       overflow: hidden;
-      border: 5px solid #444;
     }
     .segment {
+      width: 100%;
+      height: 100%;
       position: absolute;
-      width: 50%;
-      height: 50%;
-      transform-origin: 100% 100%;
-      clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: white;
+      clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+      transform-origin: 50% 50%;
     }
-    .segment1 { background: #000000; transform: rotate(0deg); }       /* Black */
-    .segment2 { background: #000000; transform: rotate(90deg); }      /* Black */
-    .segment3 { background: #000000; transform: rotate(180deg); }     /* Black */
-    .segment4 { background: #000000; transform: rotate(270deg); }     /* Black */.spin-btn {
-  position: absolute;
-  top: 110px;
-  left: 110px;
-  width: 80px;
-  height: 80px;
-  background: white;
-  color: black;
-  border-radius: 50%;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10;
-}
+    .segment1 {
+      background: #f87171; /* Red */
+      transform: rotate(0deg);
+    }
+    .segment2 {
+      background: #4ade80; /* Green */
+      transform: rotate(90deg);
+    }
+    .segment3 {
+      background: #fde047; /* Yellow */
+      transform: rotate(180deg);
+    }
+    .segment4 {
+      background: #60a5fa; /* Blue */
+      transform: rotate(270deg);
+    }
 
+    .spin-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+      background: black;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      border-radius: 50%;
+      z-index: 10;
+      border: 4px solid white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="wheel-container" id="wheel">
+    <div class="segment segment1"></div>
+    <div class="segment segment2"></div>
+    <div class="segment segment3"></div>
+    <div class="segment segment4"></div>
+    <div class="spin-btn" onclick="spinWheel()">Spin</div>
+  </div>
+
+  <script>
+    function spinWheel() {
+      const wheel = document.getElementById('wheel');
+      const rotateTo = 3600 + Math.floor(Math.random() * 360);
+      wheel.style.transition = 'transform 4s ease-out';
+      wheel.style.transform = `rotate(${rotateTo}deg)`;
+    }
+  </script>
+</body>
+</html>
 #popup {
   display: none;
   position: fixed;
