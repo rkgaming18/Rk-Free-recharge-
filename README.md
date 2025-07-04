@@ -1,88 +1,40 @@
-<!DOCTYPE html>  <html lang="as">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-  <title>RK Gaming Spin</title>  
-  <style>  
-    body {  
-      font-family: sans-serif;  
-      background: #0f172a;  
-      color: white;  
-      text-align: center;  
-      padding: 30px;  
-    }  
-    .wheel {  
-      width: 300px;  
-      height: 300px;  
-      border-radius: 50%;  
-      border: 10px solid #22d3ee;  
-      margin: 30px auto;  
-      position: relative;  
-      background: conic-gradient(  
-        #4ade80 0deg 90deg,  
-        #facc15 90deg 180deg,  
-        #60a5fa 180deg 270deg,  
-        #f87171 270deg 360deg  
-      );  
-      transition: transform 5s ease-out;  
-    }  
-    .button {  
-      background: #22c55e;  
-      border: none;  
-      padding: 12px 25px;  
-      color: white;  
-      font-size: 18px;  
-      border-radius: 8px;  
-      cursor: pointer;  
-      margin-top: 20px;  
-    }  
-    .result {  
-      font-size: 20px;  
-      margin-top: 20px;  
-    }  
-    .share {  
-      background: #25d366;  
-      color: white;  
-      text-decoration: none;  
-      display: inline-block;  
-      margin-top: 20px;  
-      padding: 10px 20px;  
-      border-radius: 6px;  
-      font-weight: bold;  
-    }  
-  </style>  
-</head>  
-<body>  
-  <h1>🎮 RK Gaming Spin to Win 🎁</h1>  
-  <div class="wheel" id="wheel"></div>  
-  <button class="button" onclick="spinWheel()">🔄 চকৰি ঘূৰাওক</button>  
-  <div class="result" id="result"></div>  
-  <a id="shareBtn" class="share" href="#" target="_blank">📤 WhatsAppত Share কৰক</a>    <script>  
-    const wheel = document.getElementById("wheel");  
-    const result = document.getElementById("result");  
-    const shareBtn = document.getElementById("shareBtn");  
-  
-    const prizes = [  
-      "₹299 Jio Recharge",  
-      "1GB Net Pack",  
-      "5GB Net Pack",  
-      "₹499 Recharge"  
-    ];  
-  
-    function spinWheel() {  
-      const angle = 3600 + Math.floor(Math.random() * 360);  
-      wheel.style.transform = `rotate(${angle}deg)`;  
-  
-      const prizeIndex = Math.floor(((angle % 360) / 90));  
-      const selectedPrize = prizes[prizeIndex];  
-  
-      setTimeout(() => {  
-        result.innerText = `আপুনি জিকিছে: 🎉 ${selectedPrize} 🎁`;  
-        const shareText = encodeURIComponent(  
-          `মই RK Gaming Spin ত ${selectedPrize} জিকিলোঁ! আপুনি চেষ্টা কৰক: https://rkgaming18.github.io/rkgamingzone18/`
-        shareBtn.href = `https://wa.me/?text=${shareText}`;  
-      }, 5200);  
-    }  
-  </script>  </body>  
-</html>
+<script>
+  const wheel = document.querySelector('.wheel');
+  const spinBtn = document.querySelector('.spinBtn');
+  const shareBtn = document.querySelector('.shareBtn');
+  const instaBtn = document.querySelector('.instaBtn');
+  const resultBox = document.createElement('div');
+  document.body.appendChild(resultBox);
 
+  const prizes = ["২৯৯ Jio Recharge", "১GB Data", "৫GB Data", "২GB Data"];
+  const INSTAGRAM_USERNAME = "akhim_b18"; // ← তোমাৰ IG username
+
+  spinBtn.addEventListener('click', () => {
+    spinBtn.disabled = true;
+    const deg = Math.floor(5000 + Math.random() * 5000);
+    wheel.style.transition = "transform 5s ease-out";
+    wheel.style.transform = `rotate(${deg}deg)`;
+
+    setTimeout(() => {
+      const selectedIndex = Math.floor(((deg % 360) / 90));
+      const selectedPrize = prizes[3 - selectedIndex]; // Clockwise 0 = last item
+      resultBox.innerHTML = `
+        <h2 style="color:white;">আপুনি জিকিলে: ${selectedPrize}</h2>
+        <a class="shareBtn" href="#" target="_blank">📤 WhatsAppত Share কৰক</a>
+        <a class="instaBtn" href="https://instagram.com/${INSTAGRAM_USERNAME}" target="_blank">📷 Instagram Follow কৰক</a>
+      `;
+      resultBox.style.marginTop = "20px";
+      resultBox.style.display = "flex";
+      resultBox.style.flexDirection = "column";
+      resultBox.style.alignItems = "center";
+
+      // WhatsApp Share Button Functionality
+      const shareBtn = resultBox.querySelector(".shareBtn");
+      shareBtn.addEventListener("click", () => {
+        const shareText = encodeURIComponent(`নমস্কাৰ! মই RK Gaming Spin ৰ পৰা ${selectedPrize} জিকিলো। আপুনিও ঘূৰাই চাওক! 👉 https://rkgaming18.github.io/Rk-Free-recharge-/`);
+        shareBtn.href = `https://wa.me/?text=${shareText}`;
+      });
+
+    }, 5200);
+  });
+</script>
