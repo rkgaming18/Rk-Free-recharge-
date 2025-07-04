@@ -79,8 +79,7 @@
       setTimeout(() => {  
         result.innerText = `আপুনি জিকিছে: 🎉 ${selectedPrize} 🎁`;  
         const shareText = encodeURIComponent(  
-          `মই RK Free Recharge Spin ত ${selectedPrize} জিকিলোঁ! আপুনি চেষ্টা কৰক: https://[YOUR_LINK]`  
-        );  
+          `মই RK Gaming Spin ত ${selectedPrize} জিকিলোঁ! আপুনি চেষ্টা কৰক: https://rkgaming18.github.io/rkgamingzone18/`
         shareBtn.href = `https://wa.me/?text=${shareText}`;  
       }, 5200);  
     }  
