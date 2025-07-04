@@ -30,17 +30,17 @@
       font-weight: bold;
       color: white;
     }
-    .segment1 { background: #FF5733; transform: rotate(0deg); }       /* Orange */
-    .segment2 { background: #2980B9; transform: rotate(90deg); }      /* Blue */
-    .segment3 { background: #27AE60; transform: rotate(180deg); }     /* Green */
-    .segment4 { background: #F39C12; transform: rotate(270deg); }     /* Yellow */.spin-btn {
+    .segment1 { background: #000000; transform: rotate(0deg); }       /* Black */
+    .segment2 { background: #000000; transform: rotate(90deg); }      /* Black */
+    .segment3 { background: #000000; transform: rotate(180deg); }     /* Black */
+    .segment4 { background: #000000; transform: rotate(270deg); }     /* Black */.spin-btn {
   position: absolute;
   top: 110px;
   left: 110px;
   width: 80px;
   height: 80px;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   border-radius: 50%;
   font-size: 18px;
   font-weight: bold;
